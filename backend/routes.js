@@ -1,5 +1,5 @@
 const express = require("express");
-const { filter } = require("./utils");
+const { filter, sort } = require("./utils");
 const routes = express.Router();
 
 const url = "http://20.244.56.144/train/"
@@ -51,7 +51,7 @@ routes.route("/train/trains").get(
         
             const data = await response.json();
 
-            res.json(filter(data));
+            res.json(sort(filter(data)));
           } catch (error) {
             console.error('Error fetching data:', error.message);
             res.status(500).json({ error: 'An error occurred while fetching data' });
