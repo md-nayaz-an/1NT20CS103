@@ -38,6 +38,7 @@ routes.route("/train/trains").get(
     async(req, res) => {
         try {
             await auth();
+            
             const response = await fetch(url + "/trains", {
               method: 'GET',
               headers: {
@@ -58,5 +59,36 @@ routes.route("/train/trains").get(
           }
     }
 )
+routes.route("/train/id").get(
+    async(req, res) => {
+        try {
+            await auth();
+            
+            if(trainNo === undefined) {
+                throw new Error("Not found");
+            }
+            
+            console.log(url + "/trains/" + trainNo);
+            const response = await fetch(url + "/trains/" + trainNo , {
+              method: 'GET',
+              headers: {
+                'Authorization': `Bearer ${token}`
+              }
+            });
+        
+            if (!response.ok) {
+              throw new Error(`Request failed with status: ${response.status}`);
+            }
+        
+            const data = await response.json();
+
+            res.json(data);
+          } catch (error) {
+            console.error('Error fetching data:', error.message);
+            res.status(500).json({ error: 'An error occurred while fetching train data' });
+          }
+    }
+)
+
 
 module.exports = routes
