@@ -5,12 +5,12 @@ const routes = express.Router();
 const url = "http://20.244.56.144/train/"
 let token = "";
 const authData = {
-    "companyName": "N",
-    "clientID": "67e0a0f9-f5ef-43e2-b1ac-6861c5743fe7",
-    "clientSecret": "sEzrVkbaIRyaNUvC",
-    "ownerName": "Ram",
-    "ownerEmail": "ram@abc.edu",
-    "rollNo": "1NT20"
+    "companyName": "NMIT",
+    "clientID": "b5ae8a28-59c8-41b1-868e-be8c644fd89f",
+    "clientSecret": "QrkgMMItrWApJCAJ",
+    "ownerName": "Mohammed Nayaz A N",
+    "ownerEmail": "mohammednayazan@gmail.com",
+    "rollNo": "1NT20CS103"
 }
 
 async function auth () {
@@ -64,6 +64,7 @@ routes.route("/train/id").get(
         try {
             await auth();
             
+            let trainNo = req.query.trainno;
             if(trainNo === undefined) {
                 throw new Error("Not found");
             }
